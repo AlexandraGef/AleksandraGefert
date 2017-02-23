@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduktyViewDlg" widgetVar="ProduktyViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProduktyTitle}">
+            <h:form id="ProduktyViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{produktyController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProduktyLabel_id}"/>
+                        <h:outputText value="#{produktyController.selected.id}" title="#{bundle.ViewProduktyTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktKategoriaKodu}"/>
+                        <h:outputText value="#{produktyController.selected.produktKategoriaKodu}" title="#{bundle.ViewProduktyTitle_produktKategoriaKodu}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktKod}"/>
+                        <h:outputText value="#{produktyController.selected.produktKod}" title="#{bundle.ViewProduktyTitle_produktKod}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktShortDesc}"/>
+                        <h:outputText value="#{produktyController.selected.produktShortDesc}" title="#{bundle.ViewProduktyTitle_produktShortDesc}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktLongDesc}"/>
+                        <h:outputText value="#{produktyController.selected.produktLongDesc}" title="#{bundle.ViewProduktyTitle_produktLongDesc}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktZdjecie}"/>
+                        <h:outputText value="#{produktyController.selected.produktZdjecie}" title="#{bundle.ViewProduktyTitle_produktZdjecie}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktKolor}"/>
+                        <h:outputText value="#{produktyController.selected.produktKolor}" title="#{bundle.ViewProduktyTitle_produktKolor}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktGwarancja}"/>
+                        <h:outputText value="#{produktyController.selected.produktGwarancja}" title="#{bundle.ViewProduktyTitle_produktGwarancja}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktRozmiar}"/>
+                        <h:outputText value="#{produktyController.selected.produktRozmiar}" title="#{bundle.ViewProduktyTitle_produktRozmiar}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktWartosc}"/>
+                        <h:outputText value="#{produktyController.selected.produktWartosc}" title="#{bundle.ViewProduktyTitle_produktWartosc}"/>
+                        <h:outputText value="#{bundle.ViewProduktyLabel_produktDniDostaw}"/>
+                        <h:outputText value="#{produktyController.selected.produktDniDostaw}" title="#{bundle.ViewProduktyTitle_produktDniDostaw}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProduktyViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

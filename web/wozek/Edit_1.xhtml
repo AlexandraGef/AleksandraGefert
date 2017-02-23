@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WozekEditDlg" widgetVar="WozekEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditWozekTitle}">
+            <h:form id="WozekEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{wozekController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditWozekLabel_ilosc}" for="ilosc" />
+                        <p:inputText id="ilosc" value="#{wozekController.selected.ilosc}" title="#{bundle.EditWozekTitle_ilosc}" />
+                        <p:outputLabel value="#{bundle.EditWozekLabel_klient}" for="klient" />
+                        <p:inputText id="klient" value="#{wozekController.selected.klient}" title="#{bundle.EditWozekTitle_klient}" />
+                        <p:outputLabel value="#{bundle.EditWozekLabel_produktKod}" for="produktKod" />
+                        <p:inputText id="produktKod" value="#{wozekController.selected.produktKod}" title="#{bundle.EditWozekTitle_produktKod}" />
+                        <p:outputLabel value="#{bundle.EditWozekLabel_produktWartosc}" for="produktWartosc" />
+                        <p:inputText id="produktWartosc" value="#{wozekController.selected.produktWartosc}" title="#{bundle.EditWozekTitle_produktWartosc}" />
+                        <p:outputLabel value="#{bundle.EditWozekLabel_wozekData}" for="wozekData" />
+                        <p:calendar id="wozekData" pattern="MM/dd/yyyy" value="#{wozekController.selected.wozekData}" title="#{bundle.EditWozekTitle_wozekData}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{wozekController.update}" value="#{bundle.Save}" update="display,:WozekListForm:datalist,:growl" oncomplete="handleSubmit(args, 'WozekEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WozekEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduktyPinDostawViewDlg" widgetVar="ProduktyPinDostawViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProduktyPinDostawTitle}">
+            <h:form id="ProduktyPinDostawViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{produktyPinDostawController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProduktyPinDostawLabel_id}"/>
+                        <h:outputText value="#{produktyPinDostawController.selected.id}" title="#{bundle.ViewProduktyPinDostawTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewProduktyPinDostawLabel_produktKod}"/>
+                        <h:outputText value="#{produktyPinDostawController.selected.produktKod}" title="#{bundle.ViewProduktyPinDostawTitle_produktKod}"/>
+                        <h:outputText value="#{bundle.ViewProduktyPinDostawLabel_pin}"/>
+                        <h:outputText value="#{produktyPinDostawController.selected.pin}" title="#{bundle.ViewProduktyPinDostawTitle_pin}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProduktyPinDostawViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

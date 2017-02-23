@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SprzedawcaEditDlg" widgetVar="SprzedawcaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSprzedawcaTitle}">
+            <h:form id="SprzedawcaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sprzedawcaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sprzedawcaController.selected.id}" title="#{bundle.EditSprzedawcaTitle_id}" required="true" requiredMessage="#{bundle.EditSprzedawcaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_sprzedawcaKod}" for="sprzedawcaKod" />
+                        <p:inputText id="sprzedawcaKod" value="#{sprzedawcaController.selected.sprzedawcaKod}" title="#{bundle.EditSprzedawcaTitle_sprzedawcaKod}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_sprzedawcaImie}" for="sprzedawcaImie" />
+                        <p:inputText id="sprzedawcaImie" value="#{sprzedawcaController.selected.sprzedawcaImie}" title="#{bundle.EditSprzedawcaTitle_sprzedawcaImie}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_sprzedawcaNazwisko}" for="sprzedawcaNazwisko" />
+                        <p:inputText id="sprzedawcaNazwisko" value="#{sprzedawcaController.selected.sprzedawcaNazwisko}" title="#{bundle.EditSprzedawcaTitle_sprzedawcaNazwisko}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_sellerAdres}" for="sellerAdres" />
+                        <p:inputText id="sellerAdres" value="#{sprzedawcaController.selected.sellerAdres}" title="#{bundle.EditSprzedawcaTitle_sellerAdres}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_sellerTelefon}" for="sellerTelefon" />
+                        <p:inputText id="sellerTelefon" value="#{sprzedawcaController.selected.sellerTelefon}" title="#{bundle.EditSprzedawcaTitle_sellerTelefon}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_produktKod}" for="produktKod" />
+                        <p:inputText id="produktKod" value="#{sprzedawcaController.selected.produktKod}" title="#{bundle.EditSprzedawcaTitle_produktKod}" />
+                        <p:outputLabel value="#{bundle.EditSprzedawcaLabel_produktWartosc}" for="produktWartosc" />
+                        <p:inputText id="produktWartosc" value="#{sprzedawcaController.selected.produktWartosc}" title="#{bundle.EditSprzedawcaTitle_produktWartosc}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sprzedawcaController.update}" value="#{bundle.Save}" update="display,:SprzedawcaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SprzedawcaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SprzedawcaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

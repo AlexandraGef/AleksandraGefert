@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PrzebiegDostawCreateDlg" widgetVar="PrzebiegDostawCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePrzebiegDostawTitle}">
+            <h:form id="PrzebiegDostawCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{przebiegDostawController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreatePrzebiegDostawLabel_scheduleZamowienie}" for="scheduleZamowienie" />
+                        <p:inputText id="scheduleZamowienie" value="#{przebiegDostawController.selected.scheduleZamowienie}" title="#{bundle.CreatePrzebiegDostawTitle_scheduleZamowienie}" />
+                        <p:outputLabel value="#{bundle.CreatePrzebiegDostawLabel_scheduleTyp}" for="scheduleTyp" />
+                        <p:inputText id="scheduleTyp" value="#{przebiegDostawController.selected.scheduleTyp}" title="#{bundle.CreatePrzebiegDostawTitle_scheduleTyp}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{przebiegDostawController.create}" value="#{bundle.Save}" update="display,:PrzebiegDostawListForm:datalist,:growl" oncomplete="handleSubmit(args,'PrzebiegDostawCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PrzebiegDostawCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

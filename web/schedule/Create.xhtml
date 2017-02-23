@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ScheduleCreateDlg" widgetVar="ScheduleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateScheduleTitle}">
+            <h:form id="ScheduleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{scheduleController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_userkod}" for="userkod" />
+                        <p:inputText id="userkod" value="#{scheduleController.selected.userkod}" title="#{bundle.CreateScheduleTitle_userkod}" />
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_klient}" for="klient" />
+                        <p:inputText id="klient" value="#{scheduleController.selected.klient}" title="#{bundle.CreateScheduleTitle_klient}" />
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_produktKod}" for="produktKod" />
+                        <p:inputText id="produktKod" value="#{scheduleController.selected.produktKod}" title="#{bundle.CreateScheduleTitle_produktKod}" />
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_planZamowienia}" for="planZamowienia" />
+                        <p:inputText id="planZamowienia" value="#{scheduleController.selected.planZamowienia}" title="#{bundle.CreateScheduleTitle_planZamowienia}" />
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_planTyp}" for="planTyp" />
+                        <p:inputText id="planTyp" value="#{scheduleController.selected.planTyp}" title="#{bundle.CreateScheduleTitle_planTyp}" />
+                        <p:outputLabel value="#{bundle.CreateScheduleLabel_planData}" for="planData" />
+                        <p:calendar id="planData" pattern="MM/dd/yyyy" value="#{scheduleController.selected.planData}" title="#{bundle.EditScheduleTitle_planData}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{scheduleController.create}" value="#{bundle.Save}" update="display,:ScheduleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ScheduleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ScheduleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">Drogerie Puderek</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+    
+    <h:body onload="fn_css()" >
+         <script> 
+function fn_css() 
+{ 
+var css_input= document.getElementById("outputcss").value; 
+if(css_input == "")
+    css_input = "jsfcrud"
+else
+{
+var link= document.getElementsByTagName("link"); 
+var link=link[1].href; 
+link=link.substr(0,link.lastIndexOf("resource/"))+"resource/"+css_input+".css?ln=css"; 
+document.getElementsByTagName("link")[1].href=link;  
+}
+}
+</script> 
+        
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="150" header="#{bundle.AppName}">
+                <p:panelGrid columns="5" style="width: 100%">
+                    <p:graphicImage value="/zdjecia/Puderek.png" style="margin-left:  10%"/>
+                    <p:panelGrid columns="5" style="width: 100%" class="panelgrid" 
+                                >
+                       
+                       <p:commandButton  id="loginButton"  value="Zaloguj"
+                                         actionListener="#{uzytkownikController.prepareCreate()}" 
+                                         update=":LoginCreateForm" oncomplete="PF('LoginDlg').show()" disabled="#{session.getAttribute('uzytkownik') != null}" /> 
+                      
+                       <p:commandButton value="Moje dane" disabled="#{session.getAttribute('uzytkownik') == null}" action="/uzytkownik/Dane.xhtml?faces-redirect=true"/>
+                        <p:commandButton value="Mój wózek" action="/wozek/ListWozek.xhtml?faces-redirect=true" disabled="#{session.getAttribute('uzytkownik') == null}"/>
+                        <p:commandButton value="Śledzenie przesyłek" action="/schedule/scheduleList.xhtml?faces-redirect=true" disabled="#{session.getAttribute('uzytkownik') == null}"/>
+                        <p:commandButton value="Wyloguj" actionListener="#{commonbean.logout()}" action="/index.xhtml?faces-redirect=true" disabled="#{session.getAttribute('uzytkownik') == null}"/>
+  
+                        
+                        
+                        <h:panelGroup class="panelGroup"> 
+                            <p:inputText type="hidden" id="sessionrole" value="Rola:#{commonbean.getsess('role')}" /> 
+                            <c:set var="sessionrole" value="#{commonbean.getsess('role')}" /> 
+                            <c:if test="${role eq 'c'}" > <p:outputLabel id="role" value="Rola: Klient" /></c:if> 
+                            <c:if test="${role eq 'a'}" > <p:outputLabel id="role" value="Rola: Adminstrator" /></c:if> 
+                            <c:if test="${role eq 's'}" > <p:outputLabel id="role" value="Rola: Sprzedawca" /></c:if> 
+                        </h:panelGroup>
+                        <p:outputLabel id="sessionuser" value="Użytkownik:#{session.getAttribute('uzytkownik')}"/>
+                        <p:outputLabel id="sessioncatg" value="Kategoria:#{commonbean.getsess('sessioncatg')}"/>
+                        <p:inputText type="hidden" id="sessionitem" value="Produkty:#{commonbean.getsess('sessionsort')}"/>
+                        <p:inputText type="hidden" id="outputcss" value="#{commonbean.getsess('sessioncss')}"/>
+                        
+                        
+                    </p:panelGrid>
+                </p:panelGrid>
+                <h:form id="searchform" class="szukaj">
+                    <p:menubar id="menubar" model="#{menuController.model1}" class="menu" >
+                        
+                        <f:facet name="options">
+                            
+                            <p:selectOneMenu value="#{commonbean.css}">
+                                <p:ajax listener="#{commonbean.setsess('sessioncss', commonbean.css)}" update=":outputcss" oncomplete="fn_css()"/>
+                                <f:selectItem itemLabel="Wybierz design" itemValue="" />
+                                    <f:selectItems value="#{['Niebieski','Pomarańczowy','Fioletowy','Czerwony']}"/>
+                                   
+                                </p:selectOneMenu>
+                            
+                    </f:facet>
+                     
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+             <p:layoutUnit position="west" size="200">
+                 <div class="left">
+                 <ui:include src="katProd/listakategorii.xhtml"/>
+                 </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" size="200">
+                <div class="right">
+                 <ui:include src="bankiUpust/oferty.xhtml"/>
+                </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="30" > 
+<div class="footer"> 
+<ui:insert name="footer" /> 
+<p:panelGrid columns="5" > 
+<p:commandLink value="O Nas" oncomplete="PF('aboutusDialog').show()" styleClass="footer"/> 
+<p:commandLink value="Mapa Serwisu" oncomplete="PF('sitemapDialog').show()"/> 
+<p:commandLink value="Kontakt" oncomplete="PF('contactusDialog').show()" styleClass="footer"/> 
+<p:commandLink value="FAQ" oncomplete="PF('faqDialog').show()" styleClass="footer"/> 
+<p:commandLink value="Dane sklepu" oncomplete="PF('systemDialog').show()" styleClass="footer"/> 
+</p:panelGrid> 
+</div> 
+</p:layoutUnit> 
+        </p:layout>
+ <ui:include src="uzytkownik/Login.xhtml"/>
+<ui:include src="czescstopki.xhtml"/>
+
+
+    </h:body>
+
+</html>

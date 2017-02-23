@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SprzedawcaViewDlg" widgetVar="SprzedawcaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSprzedawcaTitle}">
+            <h:form id="SprzedawcaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sprzedawcaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_id}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.id}" title="#{bundle.ViewSprzedawcaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_sprzedawcaKod}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.sprzedawcaKod}" title="#{bundle.ViewSprzedawcaTitle_sprzedawcaKod}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_sprzedawcaImie}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.sprzedawcaImie}" title="#{bundle.ViewSprzedawcaTitle_sprzedawcaImie}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_sprzedawcaNazwisko}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.sprzedawcaNazwisko}" title="#{bundle.ViewSprzedawcaTitle_sprzedawcaNazwisko}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_sellerAdres}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.sellerAdres}" title="#{bundle.ViewSprzedawcaTitle_sellerAdres}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_sellerTelefon}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.sellerTelefon}" title="#{bundle.ViewSprzedawcaTitle_sellerTelefon}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_produktKod}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.produktKod}" title="#{bundle.ViewSprzedawcaTitle_produktKod}"/>
+                        <h:outputText value="#{bundle.ViewSprzedawcaLabel_produktWartosc}"/>
+                        <h:outputText value="#{sprzedawcaController.selected.produktWartosc}" title="#{bundle.ViewSprzedawcaTitle_produktWartosc}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SprzedawcaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

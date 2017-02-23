@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SystemCreateDlg" widgetVar="SystemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSystemTitle}">
+            <h:form id="SystemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{systemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSystemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{systemController.selected.id}" title="#{bundle.CreateSystemTitle_id}" required="true" requiredMessage="#{bundle.CreateSystemRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSystemLabel_companyName}" for="companyName" />
+                        <p:inputText id="companyName" value="#{systemController.selected.companyName}" title="#{bundle.CreateSystemTitle_companyName}" />
+                        <p:outputLabel value="#{bundle.CreateSystemLabel_add1}" for="add1" />
+                        <p:inputText id="add1" value="#{systemController.selected.add1}" title="#{bundle.CreateSystemTitle_add1}" />
+                        <p:outputLabel value="#{bundle.CreateSystemLabel_add3}" for="add3" />
+                        <p:inputText id="add3" value="#{systemController.selected.add3}" title="#{bundle.CreateSystemTitle_add3}" />
+                        <p:outputLabel value="#{bundle.CreateSystemLabel_bottomMessage}" for="bottomMessage" />
+                        <p:inputText id="bottomMessage" value="#{systemController.selected.bottomMessage}" title="#{bundle.CreateSystemTitle_bottomMessage}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{systemController.create}" value="#{bundle.Save}" update="display,:SystemListForm:datalist,:growl" oncomplete="handleSubmit(args,'SystemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SystemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

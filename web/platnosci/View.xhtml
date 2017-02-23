@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlatnosciViewDlg" widgetVar="PlatnosciViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPlatnosciTitle}">
+            <h:form id="PlatnosciViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{platnosciController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_id}"/>
+                        <h:outputText value="#{platnosciController.selected.id}" title="#{bundle.ViewPlatnosciTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_userkod}"/>
+                        <h:outputText value="#{platnosciController.selected.userkod}" title="#{bundle.ViewPlatnosciTitle_userkod}"/>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_klient}"/>
+                        <h:outputText value="#{platnosciController.selected.klient}" title="#{bundle.ViewPlatnosciTitle_klient}"/>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_produktKod}"/>
+                        <h:outputText value="#{platnosciController.selected.produktKod}" title="#{bundle.ViewPlatnosciTitle_produktKod}"/>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_platnosciOpcje}"/>
+                        <h:outputText value="#{platnosciController.selected.platnosciOpcje}" title="#{bundle.ViewPlatnosciTitle_platnosciOpcje}"/>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_platnosciData}"/>
+                        <h:outputText value="#{platnosciController.selected.platnosciData}" title="#{bundle.ViewPlatnosciTitle_platnosciData}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPlatnosciLabel_platnosciStatus}"/>
+                        <h:outputText value="#{platnosciController.selected.platnosciStatus}" title="#{bundle.ViewPlatnosciTitle_platnosciStatus}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PlatnosciViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

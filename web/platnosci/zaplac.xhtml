@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ZaplacDlg" widgetVar="ZaplacDialog" modal="true" resizable="false" appendTo="@(body)" header="Wybierz sposób zapłaty za zakupy">
+            <h:form id="ZaplacForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="1" rendered="#{platnosciController.selected != null}">
+                        <p:panel>
+                            <p:outputLabel value="#{session.getAttribute('uzytkownik')}"/>
+                            <p:outputLabel value=" wybierz sposób w jaki zapłacisz za "/>
+                            <p:outputLabel value="#{wozekController.selected.produktKod}" />
+                            <br/><br/>
+                            
+                            <p:selectOneMenu  id="platnosc" value="#{commonbean.platnosc}" style="width:125px"  >
+                                  <p:ajax listener="#{commonbean.setsess('sessionplatnosc', commonbean.platnosc)}"/>
+                                  <f:selectItem itemLabel="Wybierz płatność" itemValue=""/>
+                                  <f:selectItems value="#{['Przelew', 'Payu']}"/>
+                               
+                            </p:selectOneMenu>
+                        </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{platnosciController.createwozek(wozekController.selected.produktKod, commonbean.getsess('sessionplatnosc'))}" action="#{wozekController.destroy()}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'ZaplacDialog');" onclick="ZaplacDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ZaplacDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

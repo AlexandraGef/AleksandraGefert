@@ -1,0 +1,124 @@
+.ui-widget ,.ui-widget-content{
+    font-size: 12px !important;
+    color: black !important;
+
+    
+}
+.ui-widget-header{
+    background-color: #ff66cc!important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;
+    background-color: #ff66cc;
+    
+}
+.ui-layout-north .ui-layout-unit-content, ui-layout-north .ui-widget-content {
+    overflow: visible !important;
+    background-color: #ff66cc!important;
+    color:white !important;
+}
+.ui-datatable-footer .ui-button {
+    float:left;
+    margin-top: 25px !important;
+    background-color: #cc00cc !important;
+    color: white !important;
+}
+.ui-datatable .ui-widget .ui-widget-content{
+    background-color: pink!important;
+}
+.ui-panelgrid td, .ui-panelgrid tr , .ui-panelgrid font {
+    border-style: none!important;
+    
+}
+.ui-panelgrid{
+    border-style: none !important;
+    color: white !important;
+}
+.buy{
+    background-color: pink;
+    color:cornsilk;
+    font: 40px;
+     
+}
+.panelGroup{
+    background-color: #ff66cc!important;
+}
+.panelgrid{
+    background-color: #ff66cc !important;
+}
+
+.button-noborder
+{
+    background:white;
+    border-color:white;
+    border: white;
+    width: 100%;
+    height: 25px;
+    display: inline-block;
+    font-family: 'pluto-sansthin';
+    font-size: 1.4em;
+        
+}
+.ui-button
+{
+    background-color: #cc00cc !important;
+}
+
+/*panels*/
+.right,.left,.right.ui-widget-content, .left .ui-widget-content
+{
+    background-color:  #ff00cc !important;
+    color: white;
+    height: 100%;
+    z-index: 20 !important;
+    overflow: visible !important;
+}
+    
+    /*data-table */
+    .ui-widget-content .ui-datatable-odd
+    {
+        background-color: #ff66cc !important;
+        
+    }
+    .ui-widget-content .ui-datatable-even {
+        background-color: #ff99ff !important;
+    }
+    .ui-state-default
+    {
+        background-color: #cc00cc !important;
+        color:whitesmoke !important;
+    }
+    .ui-datatable-header, .ui-datatable-footer, .ui-paginator
+    {
+        background-color: #ff00cc !important;
+        color:whitesmoke!important;
+        
+            
+    }
+    /*menu*/
+    .ui-menu
+    {
+        background-color: #ff66cc!important;
+        color:white!important;
+     
+        
+    }
+
+    .ui-menusearch .ui-widget-content, .ui-widget-content
+    {
+        background-color: #ff66cc !important;
+    }
+    .ui-menu-list
+    {
+        background-color: #ff66cc !important;
+        color:white !important;
+    }
+    .footer .ui-widget-content, .footer, .ui-layout-south
+    {
+    background-color:#ff00cc!important;
+    color:white !important;
+    height: 100%;
+    width: 100%
+    }
+   

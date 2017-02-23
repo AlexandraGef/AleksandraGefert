@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="kos" type="javax.sql.DataSource">#Tue Feb 07 13:56:59 CET 2017
+jdbcDriver=com.mysql.jdbc.Driver
+password=root
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/sklep z kosmetykami?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>

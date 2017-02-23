@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UzytkownikViewDlg" widgetVar="UzytkownikViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUzytkownikTitle}">
+            <h:form id="UzytkownikViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uzytkownikController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_id}"/>
+                        <h:outputText value="#{uzytkownikController.selected.id}" title="#{bundle.ViewUzytkownikTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_user}"/>
+                        <h:outputText value="#{uzytkownikController.selected.user}" title="#{bundle.ViewUzytkownikTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_password}"/>
+                        <h:outputText value="#{uzytkownikController.selected.password}" title="#{bundle.ViewUzytkownikTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_role}"/>
+                        <h:outputText value="#{uzytkownikController.selected.role}" title="#{bundle.ViewUzytkownikTitle_role}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_createDate}"/>
+                        <h:outputText value="#{uzytkownikController.selected.createDate}" title="#{bundle.ViewUzytkownikTitle_createDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_hint}"/>
+                        <h:outputText value="#{uzytkownikController.selected.hint}" title="#{bundle.ViewUzytkownikTitle_hint}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_hintAns}"/>
+                        <h:outputText value="#{uzytkownikController.selected.hintAns}" title="#{bundle.ViewUzytkownikTitle_hintAns}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_userName}"/>
+                        <h:outputText value="#{uzytkownikController.selected.userName}" title="#{bundle.ViewUzytkownikTitle_userName}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_userEmail}"/>
+                        <h:outputText value="#{uzytkownikController.selected.userEmail}" title="#{bundle.ViewUzytkownikTitle_userEmail}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_plec}"/>
+                        <h:outputText value="#{uzytkownikController.selected.plec}" title="#{bundle.ViewUzytkownikTitle_plec}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_dob}"/>
+                        <h:outputText value="#{uzytkownikController.selected.dob}" title="#{bundle.ViewUzytkownikTitle_dob}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_telefon}"/>
+                        <h:outputText value="#{uzytkownikController.selected.telefon}" title="#{bundle.ViewUzytkownikTitle_telefon}"/>
+                        <h:outputText value="#{bundle.ViewUzytkownikLabel_adres}"/>
+                        <h:outputText value="#{uzytkownikController.selected.adres}" title="#{bundle.ViewUzytkownikTitle_adres}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UzytkownikViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

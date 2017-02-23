@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PrzebiegDostawEditDlg" widgetVar="PrzebiegDostawEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPrzebiegDostawTitle}">
+            <h:form id="PrzebiegDostawEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{przebiegDostawController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPrzebiegDostawLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{przebiegDostawController.selected.id}" title="#{bundle.EditPrzebiegDostawTitle_id}" required="true" requiredMessage="#{bundle.EditPrzebiegDostawRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditPrzebiegDostawLabel_scheduleZamowienie}" for="scheduleZamowienie" />
+                        <p:inputText id="scheduleZamowienie" value="#{przebiegDostawController.selected.scheduleZamowienie}" title="#{bundle.EditPrzebiegDostawTitle_scheduleZamowienie}" />
+                        <p:outputLabel value="#{bundle.EditPrzebiegDostawLabel_scheduleTyp}" for="scheduleTyp" />
+                        <p:inputText id="scheduleTyp" value="#{przebiegDostawController.selected.scheduleTyp}" title="#{bundle.EditPrzebiegDostawTitle_scheduleTyp}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{przebiegDostawController.update}" value="#{bundle.Save}" update="display,:PrzebiegDostawListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PrzebiegDostawEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PrzebiegDostawEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

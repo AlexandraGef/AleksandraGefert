@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >
+
+        <ui:define name="S1">
+            <script type="text/javascript">
+                function fvalidate()
+                {
+                    var pass1 = document.getElementById("password");
+                    var pass2 = document.getElementById("retypepassword");
+                    if (pass1.value == pass2.value)
+                    {
+                        return true;
+                    } else
+                        document.getElementById("password").focus();
+                    alert("Hasła sa różne");
+                    return false;
+                }
+            </script>
+
+        </ui:define>
+        <f:loadBundle basename="/messages" var="msg"/>
+        <p:dialog id="NowyUzytkownikDlg" widgetVar="NowyUzytkownikDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUzytkownikTitle}" >
+            <h:form id="NowyUzytkownikForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uzytkownikController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_user}" for="user" />
+                        <p:inputText id="user" required="true" value="#{uzytkownikController.selected.user}" title="#{bundle.CreateUzytkownikTitle_user}" onblur="userid_validation(this, 6, 10, 'letter');"/>
+
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_password}" for="password" />
+                        <p:inputText id="password" type="password" required="true" value="#{uzytkownikController.selected.password}" title="#{bundle.CreateUzytkownikTitle_password}" />
+
+                        <p:outputLabel value="Powtórz hasło" for="retypepassword" />
+                        <p:inputText id="retypepassword" type="password" required="true" title="#{bundle.CreateUzytkownikTitle_password}"  onblur="fvalidate();"/>
+
+
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_role}" for="role" />
+                        <p:inputText id="role" value="#{uzytkownikController.selected.role}" title="#{bundle.CreateUzytkownikTitle_role}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_createDate}" for="createDate" />
+                        <p:calendar id="createDate" pattern="MM/dd/yyyy" value="#{uzytkownikController.selected.createDate}" title="#{bundle.EditUzytkownikTitle_createDate}"  showOn="button">
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_hint}" for="hint" />
+                        <p:inputText id="hint" value="#{uzytkownikController.selected.hint}" title="#{bundle.CreateUzytkownikTitle_hint}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_hintAns}" for="hintAns" />
+                        <p:inputText id="hintAns" value="#{uzytkownikController.selected.hintAns}" title="#{bundle.CreateUzytkownikTitle_hintAns}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="Imię i nazwisko:" for="userName" />
+                        <p:inputText id="userName" value="#{uzytkownikController.selected.userName}" title="#{bundle.CreateUzytkownikTitle_userName}"  onblur="capitalize_name(this)">
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_userEmail}" for="userEmail" />
+                        <p:inputText id="userEmail" validatorMessage="#{msg.emailerror}" value="#{uzytkownikController.selected.userEmail}" title="#{bundle.CreateUzytkownikTitle_userEmail}" >
+                            <f:validateRegex pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}+"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_plec}" for="plec" />
+                        <p:inputText id="plec" value="#{uzytkownikController.selected.plec}" title="#{bundle.CreateUzytkownikTitle_plec}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_dob}" for="dob" />
+                        <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{uzytkownikController.selected.dob}" title="#{bundle.EditUzytkownikTitle_dob}"  showOn="button">
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_telefon}" for="telefon" />
+                        <p:inputText id="telefon" value="#{uzytkownikController.selected.telefon}" title="#{bundle.CreateUzytkownikTitle_telefon}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_adres}" for="adres" />
+                        <p:inputText id="adres" value="#{uzytkownikController.selected.adres}" title="#{bundle.CreateUzytkownikTitle_adres}" >
+                            <f:validator validatorId="Validatorrr"/>
+                        </p:inputText>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uzytkownikController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'NowyUzytkownikDialog')"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NowyUzytkownikDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+        </p:dialog>
+
+
+    </ui:composition>
+
+</html>

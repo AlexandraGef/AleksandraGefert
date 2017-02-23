@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduktyEditDlg" widgetVar="ProduktyEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProduktyTitle}">
+            <h:form id="ProduktyEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{produktyController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{produktyController.selected.id}" title="#{bundle.EditProduktyTitle_id}" required="true" requiredMessage="#{bundle.EditProduktyRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktKategoriaKodu}" for="produktKategoriaKodu" />
+                        <p:inputText id="produktKategoriaKodu" value="#{produktyController.selected.produktKategoriaKodu}" title="#{bundle.EditProduktyTitle_produktKategoriaKodu}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktKod}" for="produktKod" />
+                        <p:inputText id="produktKod" value="#{produktyController.selected.produktKod}" title="#{bundle.EditProduktyTitle_produktKod}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktShortDesc}" for="produktShortDesc" />
+                        <p:inputText id="produktShortDesc" value="#{produktyController.selected.produktShortDesc}" title="#{bundle.EditProduktyTitle_produktShortDesc}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktLongDesc}" for="produktLongDesc" />
+                        <p:inputText id="produktLongDesc" value="#{produktyController.selected.produktLongDesc}" title="#{bundle.EditProduktyTitle_produktLongDesc}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktZdjecie}" for="produktZdjecie" />
+                        <p:inputText id="produktZdjecie" value="#{produktyController.selected.produktZdjecie}" title="#{bundle.EditProduktyTitle_produktZdjecie}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktKolor}" for="produktKolor" />
+                        <p:inputText id="produktKolor" value="#{produktyController.selected.produktKolor}" title="#{bundle.EditProduktyTitle_produktKolor}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktGwarancja}" for="produktGwarancja" />
+                        <p:inputText id="produktGwarancja" value="#{produktyController.selected.produktGwarancja}" title="#{bundle.EditProduktyTitle_produktGwarancja}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktRozmiar}" for="produktRozmiar" />
+                        <p:inputText id="produktRozmiar" value="#{produktyController.selected.produktRozmiar}" title="#{bundle.EditProduktyTitle_produktRozmiar}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktWartosc}" for="produktWartosc" />
+                        <p:inputText id="produktWartosc" value="#{produktyController.selected.produktWartosc}" title="#{bundle.EditProduktyTitle_produktWartosc}" />
+                        <p:outputLabel value="#{bundle.EditProduktyLabel_produktDniDostaw}" for="produktDniDostaw" />
+                        <p:inputText id="produktDniDostaw" value="#{produktyController.selected.produktDniDostaw}" title="#{bundle.EditProduktyTitle_produktDniDostaw}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{produktyController.update}" value="#{bundle.Save}" update="display,:ProduktyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProduktyEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProduktyEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

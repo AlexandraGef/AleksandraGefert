@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        =
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListWozekTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="WozekListForm">
+                <p:panel header="#{bundle.ListWozekTitle}" >
+                    <p:dataTable id="datalist" value="#{wozekController.itemsbyklient}" var="item" 
+                                 selectionMode="single" selection="#{wozekController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update=" viewButton editButton deleteButton"/>
+          
+                        <p:column filterBy="#{item.ilosc}">
+                            <f:facet name="header" >
+                                <h:outputText value="#{bundle.ListWozekTitle_ilosc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ilosc}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.produktKod}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWozekTitle_produktKod}" />
+                            </f:facet>
+                            <p:outputLabel value="#{item.produktKod}" />
+                        </p:column>
+                        <p:column filterBy="#{item.produktWartosc}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWozekTitle_produktWartosc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktWartosc}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.wozekData}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWozekTitle_wozekData}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.wozekData}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                          <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="Zakup produkt"/>
+                            </f:facet>
+                              <p:commandButton value="Kup" actionListener="#{platnosciController.prepareCreate()}"  update=":ZaplacForm" oncomplete="PF('ZaplacDialog').show()"/>
+                        </p:column>
+                        <f:facet name="footer">
+
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WozekViewForm" oncomplete="PF('WozekViewDialog').show()" disabled="#{empty wozekController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WozekEditForm" oncomplete="PF('WozekEditDialog').show()" disabled="#{empty wozekController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{wozekController.destroy}" update=":growl,datalist" disabled="#{empty wozekController.selected}"/>
+
+                        </f:facet>
+
+                    </p:dataTable>
+                </p:panel>
+                        <p:panel header="Eksportuj do pliku">
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/xls.png" />
+                                <p:dataExporter type="xls" target="datalist" fileName="Wózek" encoding="Windows-1250"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/pdf.png" />
+                                <p:dataExporter type="pdf" target="datalist" fileName="Wózek" encoding="Windows-1250"/>
+                            </h:commandLink>
+                        </p:panel>
+            </h:form>
+
+            <ui:include src="Edit_1.xhtml"/>
+            <ui:include src="View.xhtml"/>
+            <ui:include src="../platnosci/zaplac.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

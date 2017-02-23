@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BankiUpustViewDlg" widgetVar="BankiUpustViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBankiUpustTitle}">
+            <h:form id="BankiUpustViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bankiUpustController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBankiUpustLabel_id}"/>
+                        <h:outputText value="#{bankiUpustController.selected.id}" title="#{bundle.ViewBankiUpustTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBankiUpustLabel_znizkiDostawcyNazwa}"/>
+                        <h:outputText value="#{bankiUpustController.selected.znizkiDostawcyNazwa}" title="#{bundle.ViewBankiUpustTitle_znizkiDostawcyNazwa}"/>
+                        <h:outputText value="#{bundle.ViewBankiUpustLabel_znizkiDetale}"/>
+                        <h:outputText value="#{bankiUpustController.selected.znizkiDetale}" title="#{bundle.ViewBankiUpustTitle_znizkiDetale}"/>
+                        <h:outputText value="#{bundle.ViewBankiUpustLabel_znizkiWartosc}"/>
+                        <h:outputText value="#{bankiUpustController.selected.znizkiWartosc}" title="#{bundle.ViewBankiUpustTitle_znizkiWartosc}"/>
+                        <h:outputText value="#{bundle.ViewBankiUpustLabel_znizkiOsoby}"/>
+                        <h:outputText value="#{bankiUpustController.selected.znizkiOsoby}" title="#{bundle.ViewBankiUpustTitle_znizkiOsoby}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BankiUpustViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

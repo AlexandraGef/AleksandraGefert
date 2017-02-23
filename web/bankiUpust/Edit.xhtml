@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BankiUpustEditDlg" widgetVar="BankiUpustEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBankiUpustTitle}">
+            <h:form id="BankiUpustEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bankiUpustController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBankiUpustLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bankiUpustController.selected.id}" title="#{bundle.EditBankiUpustTitle_id}" required="true" requiredMessage="#{bundle.EditBankiUpustRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditBankiUpustLabel_znizkiDostawcyNazwa}" for="znizkiDostawcyNazwa" />
+                        <p:inputText id="znizkiDostawcyNazwa" value="#{bankiUpustController.selected.znizkiDostawcyNazwa}" title="#{bundle.EditBankiUpustTitle_znizkiDostawcyNazwa}" />
+                        <p:outputLabel value="#{bundle.EditBankiUpustLabel_znizkiDetale}" for="znizkiDetale" />
+                        <p:inputText id="znizkiDetale" value="#{bankiUpustController.selected.znizkiDetale}" title="#{bundle.EditBankiUpustTitle_znizkiDetale}" />
+                        <p:outputLabel value="#{bundle.EditBankiUpustLabel_znizkiWartosc}" for="znizkiWartosc" />
+                        <p:inputText id="znizkiWartosc" value="#{bankiUpustController.selected.znizkiWartosc}" title="#{bundle.EditBankiUpustTitle_znizkiWartosc}" />
+                        <p:outputLabel value="#{bundle.EditBankiUpustLabel_znizkiOsoby}" for="znizkiOsoby" />
+                        <p:inputText id="znizkiOsoby" value="#{bankiUpustController.selected.znizkiOsoby}" title="#{bundle.EditBankiUpustTitle_znizkiOsoby}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bankiUpustController.update}" value="#{bundle.Save}" update="display,:BankiUpustListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BankiUpustEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BankiUpustEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ScheduleViewDlg" widgetVar="ScheduleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewScheduleTitle}">
+            <h:form id="ScheduleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{scheduleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewScheduleLabel_id}"/>
+                        <h:outputText value="#{scheduleController.selected.id}" title="#{bundle.ViewScheduleTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_userkod}"/>
+                        <h:outputText value="#{scheduleController.selected.userkod}" title="#{bundle.ViewScheduleTitle_userkod}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_klient}"/>
+                        <h:outputText value="#{scheduleController.selected.klient}" title="#{bundle.ViewScheduleTitle_klient}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_produktKod}"/>
+                        <h:outputText value="#{scheduleController.selected.produktKod}" title="#{bundle.ViewScheduleTitle_produktKod}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_planZamowienia}"/>
+                        <h:outputText value="#{scheduleController.selected.planZamowienia}" title="#{bundle.ViewScheduleTitle_planZamowienia}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_planTyp}"/>
+                        <h:outputText value="#{scheduleController.selected.planTyp}" title="#{bundle.ViewScheduleTitle_planTyp}"/>
+                        <h:outputText value="#{bundle.ViewScheduleLabel_planData}"/>
+                        <h:outputText value="#{scheduleController.selected.planData}" title="#{bundle.ViewScheduleTitle_planData}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ScheduleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

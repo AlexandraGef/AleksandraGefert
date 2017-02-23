@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProduktyTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ProduktyListForm">
+                <p:panel header="#{bundle.ListProduktyTitle}">
+                    <p:dataTable id="datalist" value="#{produktyController.items}" var="item"
+                                 selectionMode="single" selection="#{produktyController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 widgetVar="ItemList"
+                                 >
+
+
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+                        <f:facet name="header">
+                            <p:panel>
+                                <p:commandButton value="Zmień wygląd podglądu" style="margin:10px" onclick="#{commonbean.controlflag()}" update="datalist" />
+                                <h:outputText value="Wyszukaj:" style="margin:10px" />
+                                <p:inputText style="margin:0px;width:150px" id="globalFilter" onkeyup="PF('ItemList').filter()" />
+
+                                <h:outputText style="margin:10px" value="Posortuj według:"/>
+                                <p:selectOneMenu id="sortdata" value="#{produktyController.sortitem}" style="width:100px">
+                                    <p:ajax listener="#{commonbean.setsess('sessionsort', produktyController.sortitem)}" update="datalist"/>
+                                    <f:selectItem itemLabel="Wybierz jedno" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Kod produktu" itemValue="produktKod"/>
+                                    <f:selectItem itemLabel="Pojemność produktu" itemValue="produktRozmiar"/>
+                                    <f:selectItem itemLabel="Cena" itemValue="produktWartosc"/>
+                                </p:selectOneMenu>
+                                <p:selectOneMenu id="sortorder" value="#{produktyController.sortorder}" style="width:100px">
+                                    <p:ajax listener="#{commonbean.setsess('sessionsortorder', produktyController.sortorder)}" update="datalist"/>
+                                    <f:selectItem itemLabel="Wybierz jedno" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Rosnąco" itemValue="asc"/>
+                                    <f:selectItem itemLabel="Malejąco" itemValue="desc"/>
+
+                                </p:selectOneMenu>
+                                <p:commandButton id="toggler" type="button" value="Widok kolumn" style="float:right"/>
+                                <p:columnToggler datasource="datalist" trigger="toggler"/>
+
+
+                            </p:panel>
+                        </f:facet>
+
+                        <p:column width="400" rendered="#{commonbean.flag2}"  >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktZdjecie}"/>
+                            </f:facet>
+                            <h:graphicImage value="/zdjecia/#{item.produktZdjecie}.jpg" style="width: 200px ; height: 200px"/>
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag2}" >
+                            <f:facet name="header">
+                                <h:outputText value="Opis"/>
+
+                            </f:facet>
+
+                            <p:panelGrid columns="2" style="width: 455px; margin-left: 0px"  >
+
+
+                                <p:outputLabel style=" margin-left: 50px;" value="#{bundle.ListProduktyTitle_produktKategoriaKodu}:     "/>
+                                <p:outputLabel value="#{item.produktKategoriaKodu}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" value="#{bundle.ListProduktyTitle_produktKod}:     "   />
+                                <p:outputLabel value="#{item.produktKod}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" value="#{bundle.ListProduktyTitle_produktKolor}:     "/>
+                                <p:outputLabel value="#{item.produktKolor}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" value="#{bundle.ListProduktyTitle_produktRozmiar}:     "/>
+                                <p:outputLabel value="#{item.produktRozmiar}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" value="#{bundle.ListProduktyTitle_produktWartosc}:     "/>
+                                <p:outputLabel value="#{item.produktWartosc}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" value="#{bundle.ListProduktyTitle_produktDniDostaw}:     "/>
+
+                                <p:outputLabel value="#{item.produktDniDostaw}"/>
+
+                                <p:outputLabel style=" margin-left: 50px" for="ilosc" value="Wybierz ilość:     "/>
+                                <p:selectOneMenu  id="ilosc" value="#{commonbean.ilosc}" style="width:125px"  >
+                                    <p:ajax listener="#{commonbean.setsessilosc('sessionilosc', commonbean.ilosc)}"/>
+                                    <f:selectItem itemLabel="Wybierz ilość" itemValue=""/>
+                                    <f:selectItems value="#{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}"/>
+
+                                </p:selectOneMenu>
+                                <p:outputLabel />        
+
+                            </p:panelGrid>
+
+                            <p:column rendered="#{commonbean.flag2}" >
+                                <f:facet name="header">
+                                    <h:outputText value=" "/>
+                                </f:facet>
+                                <p:commandButton id="viewButton" disabled="#{session.getAttribute('uzytkownik') == null}" icon="ui-icon-plus" actionListener="#{wozekController.createwozek(produktyController.selected,commonbean.getsessilosc('sessionilosc'))}"  value="Dodaj do wózka" update=":growl,datalist"/> 
+
+                            </p:column>
+
+                        </p:column>
+
+
+
+                        <p:column width="100" rendered="#{commonbean.flag1}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktZdjecie}" />
+
+                            </f:facet>
+                            <h:graphicImage value="/zdjecia/#{item.produktZdjecie}.jpg" style="width: 100px ; height: 100px"/>
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag1}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}" />
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag1}" filterBy="#{item.produktKategoriaKodu}" style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktKategoriaKodu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktKategoriaKodu}"/>
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag1}"  style="width: 100px" sortBy="#{item.produktKod}" filterBy="#{item.produktKod}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktKod}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktKod}"/>
+                        </p:column>
+
+
+
+                        <p:column rendered="#{commonbean.flag1}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktKolor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktKolor}"/>
+                        </p:column>
+
+                        <p:column rendered="#{commonbean.flag1}" sortBy="#{item.produktRozmiar}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktRozmiar}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktRozmiar}"/>
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag1}" sortBy="#{item.produktWartosc}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktWartosc}" />
+                            </f:facet>
+                            <h:outputText value="#{item.produktWartosc}"/>
+                        </p:column>
+                        <p:column rendered="#{commonbean.flag1}" sortBy="#{item.produktDniDostaw}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduktyTitle_produktDniDostaw}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produktDniDostaw}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>

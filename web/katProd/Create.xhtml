@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KatProdCreateDlg" widgetVar="KatProdCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateKatProdTitle}">
+            <h:form id="KatProdCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{katProdController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateKatProdLabel_katKod}" for="katKod" />
+                        <p:inputText id="katKod" value="#{katProdController.selected.katKod}" title="#{bundle.CreateKatProdTitle_katKod}" />
+                        <p:outputLabel value="#{bundle.CreateKatProdLabel_katSchematZnizek}" for="katSchematZnizek" />
+                        <p:inputText id="katSchematZnizek" value="#{katProdController.selected.katSchematZnizek}" title="#{bundle.CreateKatProdTitle_katSchematZnizek}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{katProdController.create}" value="#{bundle.Save}" update="display,:KatProdListForm:datalist,:growl" oncomplete="handleSubmit(args,'KatProdCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="KatProdCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

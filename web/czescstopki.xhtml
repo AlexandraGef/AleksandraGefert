@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:h="http://xmlns.jcp.org/jsf/html" 
+xmlns:p="http://primefaces.org/ui" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+     
+      
+<p:dialog id="aboutus" widgetVar="aboutusDialog" resizable="false" appendTo="@(body)" header="O Nas"> 
+<h:form id="formaboutus"> 
+Witamy w sieci drogerii "Puderek"<br/><br/> 
+Oferujemy największy wybór kosmetyków do buziaka.<br/><br/> 
+Kupując Nasze produkty nie tylko będziesz piękna ale również zaoszczędzisz sporo kasiorki.<br/><br/> 
+Serdecznie zapraszamy do wspólnych zakupów.<br/><br/> 
+</h:form> 
+</p:dialog> 
+<p:dialog id="sitemap" widgetVar="sitemapDialog" resizable="false" header="Mapa Serwisu"> 
+
+<p:panel> 
+    <ui:include src="menu/mapaserwisu.xhtml"/>
+</p:panel> 
+
+</p:dialog> 
+<p:dialog id="contactus" widgetVar="contactusDialog" resizable="false" appendTo="@(body)" header="Kontakt"> 
+<h:form id="formcontactus"> 
+Linia dostępna całodobowo : 00-000000000.<br/><br/> 
+Pomoc specjalistyczna: 99-999999999.<br/><br/> 
+E-Mail : abc@xyz.com<br/><br/> 
+</h:form> 
+</p:dialog> 
+<p:dialog id="faq" widgetVar="faqDialog" resizable="false" appendTo="@(body)" header="FAQ"> 
+<h:form id="formfaq"> 
+YOLO.
+</h:form> 
+</p:dialog>
+    <p:dialog id="system" widgetVar="systemDialog" resizable="false" header="Dane Sklepu"> 
+
+<p:panel> 
+    <ui:include src="system/system.xhtml"/>
+</p:panel> 
+
+</p:dialog> 
+</html>

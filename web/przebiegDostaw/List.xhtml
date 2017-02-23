@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPrzebiegDostawTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PrzebiegDostawListForm">
+                <p:panel header="#{bundle.ListPrzebiegDostawTitle}">
+                    <p:dataTable id="datalist" value="#{przebiegDostawController.items}" var="item"
+                                 selectionMode="single" selection="#{przebiegDostawController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPrzebiegDostawTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.scheduleZamowienie}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPrzebiegDostawTitle_scheduleZamowienie}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.scheduleZamowienie}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.scheduleTyp}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPrzebiegDostawTitle_scheduleTyp}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.scheduleTyp}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{przebiegDostawController.prepareCreate}" update=":PrzebiegDostawCreateForm" oncomplete="PF('PrzebiegDostawCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PrzebiegDostawViewForm" oncomplete="PF('PrzebiegDostawViewDialog').show()" disabled="#{empty przebiegDostawController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PrzebiegDostawEditForm" oncomplete="PF('PrzebiegDostawEditDialog').show()" disabled="#{empty przebiegDostawController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{przebiegDostawController.destroy}" update=":growl,datalist" disabled="#{empty przebiegDostawController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                <p:panel header="Eksportuj do pliku">
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/xls.png" />
+                                <p:dataExporter type="xls" target="datalist" fileName="Przebieg_Dostaw" encoding="Windows-1250"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/pdf.png" />
+                                <p:dataExporter type="pdf" target="datalist" fileName="Przebieg_Dostaw" encoding="Windows-1250"/>
+                            </h:commandLink>
+                        </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SystemEditDlg" widgetVar="SystemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSystemTitle}">
+            <h:form id="SystemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{systemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSystemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{systemController.selected.id}" title="#{bundle.EditSystemTitle_id}" required="true" requiredMessage="#{bundle.EditSystemRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSystemLabel_companyName}" for="companyName" />
+                        <p:inputText id="companyName" value="#{systemController.selected.companyName}" title="#{bundle.EditSystemTitle_companyName}" />
+                        <p:outputLabel value="#{bundle.EditSystemLabel_add1}" for="add1" />
+                        <p:inputText id="add1" value="#{systemController.selected.add1}" title="#{bundle.EditSystemTitle_add1}" />
+                        <p:outputLabel value="#{bundle.EditSystemLabel_add3}" for="add3" />
+                        <p:inputText id="add3" value="#{systemController.selected.add3}" title="#{bundle.EditSystemTitle_add3}" />
+                        <p:outputLabel value="#{bundle.EditSystemLabel_bottomMessage}" for="bottomMessage" />
+                        <p:inputText id="bottomMessage" value="#{systemController.selected.bottomMessage}" title="#{bundle.EditSystemTitle_bottomMessage}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{systemController.update}" value="#{bundle.Save}" update="display,:SystemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SystemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SystemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

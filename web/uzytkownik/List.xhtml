@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUzytkownikTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="UzytkownikListForm">
+                <p:panel header="#{bundle.ListUzytkownikTitle}">
+                    <p:dataTable id="datalist" value="#{uzytkownikController.items}" var="item"
+                                 selectionMode="single" selection="#{uzytkownikController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.user}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_user}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.user}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.password}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_password}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.password}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.role}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_role}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.role}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.createDate}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_createDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.createDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.hint}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_hint}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hint}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.hintAns}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_hintAns}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hintAns}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.userName}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_userName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userName}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.userEmail}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_userEmail}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userEmail}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.plec}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_plec}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.plec}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.dob}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_dob}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dob}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.telefon}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_telefon}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefon}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.adres}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUzytkownikTitle_adres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adres}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{uzytkownikController.prepareCreate}" update=":UzytkownikCreateForm" oncomplete="PF('UzytkownikCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UzytkownikViewForm" oncomplete="PF('UzytkownikViewDialog').show()" disabled="#{empty uzytkownikController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UzytkownikEditForm" oncomplete="PF('UzytkownikEditDialog').show()" disabled="#{empty uzytkownikController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{uzytkownikController.destroy}" update=":growl,datalist" disabled="#{empty uzytkownikController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                <p:panel header="Eksportuj do pliku">
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/xls.png" />
+                                <p:dataExporter type="xls" target="datalist" fileName="Użytkownicy" encoding="Windows-1250"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <p:graphicImage url="../zdjecia/pdf.png" />
+                                <p:dataExporter type="pdf" target="datalist" fileName="Użytkownicy" encoding="Windows-1250"/>
+                            </h:commandLink>
+                        </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

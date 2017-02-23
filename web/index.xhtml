@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:h="http://xmlns.jcp.org/jsf/html" 
+xmlns:f="http://xmlns.jcp.org/jsf/core" 
+xmlns:p="http://primefaces.org/ui" 
+> 
+
+<style type="text/css"> 
+#scroller { 
+width: 900px; 
+height: 200px; 
+border: 1px solid blue; 
+overflow: scroll; 
+margin: 0 auto; 
+} 
+#inner-scroller { 
+width: 1500px; 
+height: 210px; 
+border: 1px solid yellow; 
+color:red; 
+} 
+</style> 
+<ui:composition template="/template.xhtml"> 
+<ui:define name="title"> 
+<h:outputText value="Drogerie Puderek"></h:outputText> 
+</ui:define> 
+<ui:define name="body" > 
+<p:galleria value="#{['kos1.jpg','kos2.jpg','kos3.jpg','kos4.jpg']}" var="image" panelWidth="500" showCaption="false" panelHeight="270" style="margin-left: 22%">
+                <p:graphicImage value="/zdjecia/#{image}" width="500"/>
+            </p:galleria>
+<br/> 
+<body onload="scrolldiv();"> 
+<div id="scroller"> 
+<div id="inner-scroller" style="text-align: center"> 
+<input type="image" onclick="fn1()" src="./zdjecia/puderlala.jpg" width="220" height="200" style="text-align: right" border="2px"/> 
+<input type="image" onclick="fn2()" src="./zdjecia/tuszrimmel.jpg" width="220" height="200" style="text-align: right" border="2px"/> 
+<input type="image" onclick="fn3()" src="./zdjecia/cieniebell.jpg" width="220" height="200" style="text-align: right" border="2px"/> 
+</div> 
+</div> 
+<br /> 
+<script type="text/javascript"> 
+var i = 0; 
+var ni = 0; 
+function scrolldiv() 
+{ 
+ni = setInterval(flash, 50); 
+} 
+function flash() 
+{ 
+if (scroller.scrollLeft &lt; 500) 
+scroller.scrollLeft += 1; 
+else 
+scroller.scrollLeft = 0; 
+} 
+var link = "produkty/itemsList.xhtml"; 
+function fn1() 
+{ 
+window.location.href = link; 
+} 
+function fn2() 
+{ 
+window.location.href = link; 
+} 
+function fn3() 
+{ 
+window.location.href = link; 
+} 
+
+</script> 
+</body> 
+</ui:define> 
+</ui:composition> 
+</html> 

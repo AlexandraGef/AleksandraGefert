@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BankiUpustCreateDlg" widgetVar="BankiUpustCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBankiUpustTitle}">
+            <h:form id="BankiUpustCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bankiUpustController.selected != null}">
+ 
+                        <p:outputLabel value="#{bundle.CreateBankiUpustLabel_znizkiDostawcyNazwa}" for="znizkiDostawcyNazwa" />
+                        <p:inputText id="znizkiDostawcyNazwa" value="#{bankiUpustController.selected.znizkiDostawcyNazwa}" title="#{bundle.CreateBankiUpustTitle_znizkiDostawcyNazwa}" />
+                        <p:outputLabel value="#{bundle.CreateBankiUpustLabel_znizkiDetale}" for="znizkiDetale" />
+                        <p:inputText id="znizkiDetale" value="#{bankiUpustController.selected.znizkiDetale}" title="#{bundle.CreateBankiUpustTitle_znizkiDetale}" />
+                        <p:outputLabel value="#{bundle.CreateBankiUpustLabel_znizkiWartosc}" for="znizkiWartosc" />
+                        <p:inputText id="znizkiWartosc" value="#{bankiUpustController.selected.znizkiWartosc}" title="#{bundle.CreateBankiUpustTitle_znizkiWartosc}" />
+                        <p:outputLabel value="#{bundle.CreateBankiUpustLabel_znizkiOsoby}" for="znizkiOsoby" />
+                        <p:inputText id="znizkiOsoby" value="#{bankiUpustController.selected.znizkiOsoby}" title="#{bundle.CreateBankiUpustTitle_znizkiOsoby}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bankiUpustController.create}" value="#{bundle.Save}" update="display,:BankiUpustListForm:datalist,:growl" oncomplete="handleSubmit(args,'BankiUpustCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BankiUpustCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

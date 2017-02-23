@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UzytkownikCreateDlg" widgetVar="UzytkownikCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUzytkownikTitle}">
+            <h:form id="UzytkownikCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uzytkownikController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_user}" for="user" />
+                        <p:inputText id="user" value="#{uzytkownikController.selected.user}" title="#{bundle.CreateUzytkownikTitle_user}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{uzytkownikController.selected.password}" title="#{bundle.CreateUzytkownikTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_role}" for="role" />
+                        <p:inputText id="role" value="#{uzytkownikController.selected.role}" title="#{bundle.CreateUzytkownikTitle_role}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_createDate}" for="createDate" />
+                        <p:calendar id="createDate" pattern="MM/dd/yyyy" value="#{uzytkownikController.selected.createDate}" title="#{bundle.EditUzytkownikTitle_createDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_hint}" for="hint" />
+                        <p:inputText id="hint" value="#{uzytkownikController.selected.hint}" title="#{bundle.CreateUzytkownikTitle_hint}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_hintAns}" for="hintAns" />
+                        <p:inputText id="hintAns" value="#{uzytkownikController.selected.hintAns}" title="#{bundle.CreateUzytkownikTitle_hintAns}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{uzytkownikController.selected.userName}" title="#{bundle.CreateUzytkownikTitle_userName}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_userEmail}" for="userEmail" />
+                        <p:inputText id="userEmail" value="#{uzytkownikController.selected.userEmail}" title="#{bundle.CreateUzytkownikTitle_userEmail}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_plec}" for="plec" />
+                        <p:inputText id="plec" value="#{uzytkownikController.selected.plec}" title="#{bundle.CreateUzytkownikTitle_plec}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_dob}" for="dob" />
+                        <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{uzytkownikController.selected.dob}" title="#{bundle.EditUzytkownikTitle_dob}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_telefon}" for="telefon" />
+                        <p:inputText id="telefon" value="#{uzytkownikController.selected.telefon}" title="#{bundle.CreateUzytkownikTitle_telefon}" />
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_adres}" for="adres" />
+                        <p:inputText id="adres" value="#{uzytkownikController.selected.adres}" title="#{bundle.CreateUzytkownikTitle_adres}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uzytkownikController.create}" value="#{bundle.Save}" update="display,:UzytkownikListForm:datalist,:growl" oncomplete="handleSubmit(args,'UzytkownikCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UzytkownikCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

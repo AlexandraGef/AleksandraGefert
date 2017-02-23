@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <f:loadBundle basename="/messages" var="msg"/>
+        <p:dialog id="LoginCreateDlg" widgetVar="LoginDlg" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUzytkownikTitle}">
+            <h:form id="LoginCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uzytkownikController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_user}" for="user" />
+                        <p:inputText validatorMessage="#{msg.usernameerror}" id="user" value="#{uzytkownikController.selected.user}" title="#{bundle.CreateUzytkownikTitle_user}" >
+
+                            <f:validateRegex pattern="[a-zA-Z0-9]+"/>
+
+                        </p:inputText>
+
+                        <p:outputLabel value="#{bundle.CreateUzytkownikLabel_password}" for="password" />
+                        <p:inputText id="password" type="password" value="#{uzytkownikController.selected.password}" title="#{bundle.CreateUzytkownikTitle_password}" >
+                            <f:validator validatorId="PasswordValidator"/>
+                        </p:inputText>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{commonbean.login(uzytkownikController.selected)}" update=":sessionrole,:sessionuser,:growl,:searchform:menubar"
+                                     value="Login" oncomplete="handleLoginRequest(xhr, status, args)" onclick="LoginCreateDlg.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LoginCreateDlg.hide()"/>
+                </h:panelGroup>
+                <p:separator/>
+                <p:commandButton id="NewUser" value="Rejestracja" update=":NowyUzytkownikForm" oncomplete="PF('NowyUzytkownikDialog').show()"/>
+                <p:commandButton id="editButton" value="Przypomnij login lub hasło"  update=":PasswordEditForm" oncomplete="PF('PasswordEditDialog').show()"/>
+
+            </h:form>
+             <ui:include src="PasswordUpdate.xhtml"/>
+        <ui:include src="NewwUser.xhtml"/>
+        </p:dialog>
+       
+    </ui:composition>
+</html>

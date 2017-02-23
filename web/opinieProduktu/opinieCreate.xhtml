@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OpinieProduktuCreateDlg" widgetVar="OpinieProduktuCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOpinieProduktuTitle}">
+            <h:form id="OpinieProduktuCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{opinieProduktuController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateOpinieProduktuLabel_produktKod}" for="produktKod" />
+                        <p:inputText id="produktKod" value="#{opinieProduktuController.selected.produktKod}" title="#{bundle.CreateOpinieProduktuTitle_produktKod}" />
+                        <p:outputLabel value="#{bundle.CreateOpinieProduktuLabel_opinie}" for="opinie" />
+                        <p:inputText id="opinie" value="#{opinieProduktuController.selected.opinie}" title="#{bundle.CreateOpinieProduktuTitle_opinie}" />
+                        <p:outputLabel value="#{bundle.CreateOpinieProduktuLabel_klientKod}" for="klientKod" />
+                        <p:inputText id="klientKod" value="#{opinieProduktuController.selected.klientKod}" title="#{bundle.CreateOpinieProduktuTitle_klientKod}" />
+                        <p:outputLabel value="#{bundle.CreateOpinieProduktuLabel_dated}" for="dated" />
+                        <p:calendar id="dated" pattern="MM/dd/yyyy" value="#{opinieProduktuController.selected.dated}" title="#{bundle.EditOpinieProduktuTitle_dated}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{opinieProduktuController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'OpinieProduktuCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OpinieProduktuCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
